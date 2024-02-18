@@ -9,13 +9,23 @@ using System.Threading.Tasks;
 
 namespace DJT.Vertical.Http
 {
+    /// <summary>
+    /// Catches exceptions provided in DJT.Vertical.Exceptions and the ValidationException.
+    /// Provides relevant HTTP responses.  This is Http pipeline middleware.
+    /// </summary>
+    /// <param name="next"></param>
     public class ClientErrorMiddleware(RequestDelegate next)
     {
+        /// <summary>
+        /// Invoke the middleware
+        /// </summary>
+        /// <param name="context">Current Http Context</param>
+        /// <returns></returns>
         public async Task Invoke(HttpContext context)
         {
             try
             {
-                next(context);
+                await next(context);
             }
             catch (BadRequestException ex)
             {

@@ -5,9 +5,16 @@ using System.Reflection;
 
 namespace DJT.Vertical.Http
 {
+    /// <summary>
+    /// Extension methods for using the components in this library
+    /// </summary>
     public static class ServiceExtensions
     {
-        public static void AddVerticalComponents(IServiceCollection services)
+        /// <summary>
+        /// Adds generic AuthService dependency and registers IRequestHandlers in the calling assembly
+        /// </summary>
+        /// <param name="services"></param>
+        public static void AddVerticalComponents(this IServiceCollection services)
         {
             services.TryAddScoped<AuthService>();
 
@@ -23,7 +30,11 @@ namespace DJT.Vertical.Http
             }
         }
 
-        public static void UseVerticalComponents(IApplicationBuilder app)
+        /// <summary>
+        /// Adds client error handling middleware for web api
+        /// </summary>
+        /// <param name="app"></param>
+        public static void UseVerticalComponents(this IApplicationBuilder app)
         {
             app.UseMiddleware<ClientErrorMiddleware>();
         }
