@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <Version>8.0.0</Version>
+    <Authors>Daniel James Thorne</Authors>
+    <Company>DJT Software</Company>
+    <Description>Helpful components for building applications (particularly Web APIs) with vertical slice architecture. </Description>
+    <Copyright>Daniel James Thorne</Copyright>
+    <PackageTags>vertical slice;architecture;web api</PackageTags>
+    <RepositoryUrl>https://github.com/rombethor/djt.vertical</RepositoryUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+</Project>
