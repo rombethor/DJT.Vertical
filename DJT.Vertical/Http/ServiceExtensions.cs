@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using DJT.Vertical.Attributes;
+using DJT.Vertical.Interfaces;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Reflection;
@@ -18,15 +20,62 @@ namespace DJT.Vertical.Http
         {
             services.TryAddScoped<AuthService>();
 
-            //TO DO: Use reflection to add IRequestHandler<,>
             var allTypes = Assembly.GetCallingAssembly().GetTypes();
             foreach(var type in allTypes)
             {
+                //transient IRequestHandler
                 var i = type.GetInterface("IRequestHandler`1")
                     ?? type.GetInterface("IRequestHandler`2")
                     ?? type.GetInterface("IRequestHandler`3");
                 if (i is not null)
-                    services.AddTransient(type);
+                {
+                    services.TryAddTransient(type);
+                }
+
+                //transients
+                var t = type.GetCustomAttribute<TransientServiceAttribute>();
+
+                if (t is not null)
+                {
+                    if (t.Key != string.Empty)
+                    {
+                        services.TryAddKeyedTransient(type, t.Key);
+                    }
+                    else
+                    {
+                        services.TryAddTransient(type);
+                    }
+                }
+
+                //scoped
+                var s = type.GetCustomAttribute<ScopedServiceAttribute>();
+
+                if (s is not null)
+                {
+                    if (s.Key != string.Empty)
+                    {
+                        services.TryAddKeyedScoped(type, s.Key);
+                    }
+                    else
+                    {
+                        services.TryAddScoped(type);
+                    }
+                }
+
+                //singleton
+                var z = type.GetCustomAttribute<SingletonServiceAttribute>();
+                if (z is not null)
+                {
+                    if (z.Key != string.Empty)
+                    {
+                        services.TryAddKeyedSingleton(service: type, serviceKey: z.Key);
+                    }
+                    else
+                    {
+                        services.TryAddSingleton(type);
+                    }
+                }
+
             }
         }
 

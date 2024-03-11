@@ -16,6 +16,36 @@ app.UseVerticalComponents();
 
 ```
 
+## Service Attributes
+
+Include the `DJT.Vertical.Attributes` namespace and start registering your dependency injected classes
+using the lifetime-named attributes.  Each attribute also allows an optional key to be defined, therefore registering
+the class as a keyed service.  For example:
+
+```c#
+[SingletonService(Key = "for_science")]
+public class MySingletonService
+{
+	public void DoSomething() 
+	{
+	}
+}
+
+[ScopedService]
+public class MyScopedService ([FromKeyedServices("for_science")] MySingletonService singleton)
+{
+	public void DoSomethingElse()
+	{
+		singleton.DoSomething();
+	}
+}
+```
+
+Similarly, there is also a `[TransientService]` attribute.
+
+> Note: It is the assembly which calls directly `AddVerticalComponents()` which will
+be scanned for these attributes.
+
 ## Request Handlers
 
 Use the `IRequestHandler<>` interfaces to define the functionality of the API, using dependency injection
@@ -30,6 +60,11 @@ public class GetEmployeesHandler(MyDbContext db) : IRequestHandler<IEnumerably<E
 	}
 }
 ```
+
+## Async
+
+Included in v8.1 are abstract classes for `AsyncRequestHandler<>` which require a cancellation token and
+obligate the return value wrapped in a `Task<TRes>`.
 
 ## Exceptions
 
