@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DJT.Vertical.Attributes
+﻿namespace DJT.Vertical.Attributes
 {
     /// <summary>
     /// Register the class with the DI as a singleton service,

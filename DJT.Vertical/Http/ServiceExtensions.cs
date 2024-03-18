@@ -1,5 +1,4 @@
 ﻿using DJT.Vertical.Attributes;
-using DJT.Vertical.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;

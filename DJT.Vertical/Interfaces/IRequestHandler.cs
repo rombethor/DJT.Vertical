@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DJT.Vertical.Interfaces
+﻿namespace DJT.Vertical.Interfaces
 {
     /// <summary>
     /// A request handler which takes no arguments but provides a response.

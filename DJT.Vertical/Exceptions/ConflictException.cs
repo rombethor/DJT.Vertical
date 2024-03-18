@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DJT.Vertical.Exceptions
+﻿namespace DJT.Vertical.Exceptions
 {
     /// <summary>
     /// Provides a 409 status response, indicating Conflict.

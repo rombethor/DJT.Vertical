@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DJT.Vertical.Interfaces
+﻿namespace DJT.Vertical.Interfaces
 {
     /// <summary>
     /// Async implementation of <see cref="IRequestHandler{TResult}"/>
