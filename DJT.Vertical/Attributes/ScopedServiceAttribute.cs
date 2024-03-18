@@ -14,6 +14,27 @@ namespace DJT.Vertical.Attributes
     public class ScopedServiceAttribute : Attribute
     {
         /// <summary>
+        /// Register the class as a scoped service
+        /// </summary>
+        public ScopedServiceAttribute() { }
+
+        /// <summary>
+        /// Register the class as a scoped service which implements type <see cref="ImplementsType"/>
+        /// </summary>
+        /// <param name="implements">The type which the decorated class implements</param>
+        /// <param name="key">The keyed type</param>
+        public ScopedServiceAttribute(Type implements, string key = "")
+        {
+            ImplementsType = implements;
+            Key = key;
+        }
+
+        /// <summary>
+        /// The type (typically interface) which this scoped service implements
+        /// </summary>
+        public Type? ImplementsType { get; set; }
+
+        /// <summary>
         /// If supplied, the service will be registered as a keyed service
         /// </summary>
         public string Key { get; set; } = string.Empty;
