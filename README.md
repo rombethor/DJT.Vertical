@@ -23,8 +23,8 @@ using the lifetime-named attributes.  Each attribute also allows an optional key
 the class as a keyed service.  For example:
 
 ```c#
-[SingletonService(Key = "for_science")]
-public class MySingletonService
+[SingletonService(ImplementsType = typeof(IMyInterface),Key = "for_science")]
+public class MySingletonService : IMyInterface
 {
 	public void DoSomething() 
 	{
@@ -32,7 +32,7 @@ public class MySingletonService
 }
 
 [ScopedService]
-public class MyScopedService ([FromKeyedServices("for_science")] MySingletonService singleton)
+public class MyScopedService ([FromKeyedServices("for_science")] IMyInterface singleton)
 {
 	public void DoSomethingElse()
 	{
