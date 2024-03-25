@@ -40,11 +40,11 @@ namespace DJT.Vertical.Http
                     {
                         if (t.Key != string.Empty)
                         {
-                            services.TryAddKeyedTransient(type, t.Key, t.ImplementsType);
+                            services.TryAddKeyedTransient(t.ImplementsType, t.Key, type);
                         }
                         else
                         {
-                            services.TryAddTransient(type, t.ImplementsType);
+                            services.TryAddTransient(t.ImplementsType, type);
                         }
                     }
                     else
@@ -74,7 +74,7 @@ namespace DJT.Vertical.Http
                         }
                         else
                         {
-                            services.TryAddScoped(s.ImplementsType, s.ImplementsType);
+                            services.TryAddScoped(s.ImplementsType, type);
                         }
                     }
                     else
@@ -98,11 +98,11 @@ namespace DJT.Vertical.Http
                     {
                         if (z.Key != string.Empty)
                         {
-                            services.TryAddKeyedSingleton(type, z.Key, z.ImplementsType);
+                            services.TryAddKeyedSingleton(z.ImplementsType, z.Key, type);
                         }
                         else
                         {
-                            services.TryAddSingleton(type, z.ImplementsType);
+                            services.TryAddSingleton(z.ImplementsType, type);
                         }
                     }
                     else
