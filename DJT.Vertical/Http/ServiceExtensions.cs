@@ -1,5 +1,4 @@
 ﻿using DJT.Vertical.Attributes;
-using DJT.Vertical.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -37,14 +36,29 @@ namespace DJT.Vertical.Http
 
                 if (t is not null)
                 {
-                    if (t.Key != string.Empty)
+                    if (t.ImplementsType is not null)
                     {
-                        services.TryAddKeyedTransient(type, t.Key);
+                        if (t.Key != string.Empty)
+                        {
+                            services.TryAddKeyedTransient(t.ImplementsType, t.Key, type);
+                        }
+                        else
+                        {
+                            services.TryAddTransient(t.ImplementsType, type);
+                        }
                     }
                     else
                     {
-                        services.TryAddTransient(type);
+                        if (t.Key != string.Empty)
+                        {
+                            services.TryAddKeyedTransient(type, t.Key);
+                        }
+                        else
+                        {
+                            services.TryAddTransient(type);
+                        }
                     }
+
                 }
 
                 //scoped
@@ -52,13 +66,27 @@ namespace DJT.Vertical.Http
 
                 if (s is not null)
                 {
-                    if (s.Key != string.Empty)
+                    if (s.ImplementsType is not null)
                     {
-                        services.TryAddKeyedScoped(type, s.Key);
+                        if (s.Key  != string.Empty)
+                        {
+                            services.TryAddKeyedScoped(s.ImplementsType, s.Key, type);
+                        }
+                        else
+                        {
+                            services.TryAddScoped(s.ImplementsType, type);
+                        }
                     }
                     else
                     {
-                        services.TryAddScoped(type);
+                        if (s.Key != string.Empty)
+                        {
+                            services.TryAddKeyedScoped(type, s.Key);
+                        }
+                        else
+                        {
+                            services.TryAddScoped(type);
+                        }
                     }
                 }
 
@@ -66,13 +94,27 @@ namespace DJT.Vertical.Http
                 var z = type.GetCustomAttribute<SingletonServiceAttribute>();
                 if (z is not null)
                 {
-                    if (z.Key != string.Empty)
+                    if (z.ImplementsType is not null)
                     {
-                        services.TryAddKeyedSingleton(service: type, serviceKey: z.Key);
+                        if (z.Key != string.Empty)
+                        {
+                            services.TryAddKeyedSingleton(z.ImplementsType, z.Key, type);
+                        }
+                        else
+                        {
+                            services.TryAddSingleton(z.ImplementsType, type);
+                        }
                     }
                     else
                     {
-                        services.TryAddSingleton(type);
+                        if (z.Key != string.Empty)
+                        {
+                            services.TryAddKeyedSingleton(service: type, serviceKey: z.Key);
+                        }
+                        else
+                        {
+                            services.TryAddSingleton(type);
+                        }
                     }
                 }
 
