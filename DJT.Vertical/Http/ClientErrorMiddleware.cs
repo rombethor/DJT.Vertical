@@ -22,6 +22,10 @@ namespace DJT.Vertical.Http
             {
                 await next(context);
             }
+            catch (NotFoundException ex)
+            {
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
+            }
             catch (BadRequestException ex)
             {
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
