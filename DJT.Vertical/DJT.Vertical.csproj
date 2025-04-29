@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <Version>8.3.2</Version>
+    <Version>8.4.0</Version>
     <Authors>Daniel James Thorne</Authors>
     <Company>DJT Software</Company>
     <Description>Helpful components for building applications (particularly Web APIs) with vertical slice architecture. </Description>
