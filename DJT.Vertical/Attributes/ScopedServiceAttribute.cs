@@ -31,6 +31,6 @@
         /// <summary>
         /// If supplied, the service will be registered as a keyed service
         /// </summary>
-        public string Key { get; set; } = string.Empty;
+        public object? Key { get; set; } = string.Empty;
     }
 }
