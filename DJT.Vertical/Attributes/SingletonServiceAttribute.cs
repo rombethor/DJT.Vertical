@@ -19,7 +19,7 @@
         /// </summary>
         /// <param name="implements"></param>
         /// <param name="key"></param>
-        public SingletonServiceAttribute(Type implements, string key = "")
+        public SingletonServiceAttribute(Type implements, object? key = null)
         {
             ImplementsType = implements;
             Key = key;
@@ -33,6 +33,6 @@
         /// <summary>
         /// If supplied, the service will be registered as a keyed service
         /// </summary>
-        public string Key { get; set; } = string.Empty;
+        public object? Key { get; set; } = null;
     }
 }

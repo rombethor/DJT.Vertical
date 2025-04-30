@@ -38,7 +38,7 @@ namespace DJT.Vertical.Http
                 {
                     if (t.ImplementsType is not null)
                     {
-                        if (t.Key != string.Empty)
+                        if (t.Key != null)
                         {
                             services.TryAddKeyedTransient(t.ImplementsType, t.Key, type);
                         }
@@ -49,7 +49,7 @@ namespace DJT.Vertical.Http
                     }
                     else
                     {
-                        if (t.Key != string.Empty)
+                        if (t.Key != null)
                         {
                             services.TryAddKeyedTransient(type, t.Key);
                         }
@@ -68,7 +68,7 @@ namespace DJT.Vertical.Http
                 {
                     if (s.ImplementsType is not null)
                     {
-                        if (s.Key  != string.Empty)
+                        if (s.Key  != null)
                         {
                             services.TryAddKeyedScoped(s.ImplementsType, s.Key, type);
                         }
@@ -79,7 +79,7 @@ namespace DJT.Vertical.Http
                     }
                     else
                     {
-                        if (s.Key != string.Empty)
+                        if (s.Key != null)
                         {
                             services.TryAddKeyedScoped(type, s.Key);
                         }
@@ -96,7 +96,7 @@ namespace DJT.Vertical.Http
                 {
                     if (z.ImplementsType is not null)
                     {
-                        if (z.Key != string.Empty)
+                        if (z.Key != null)
                         {
                             services.TryAddKeyedSingleton(z.ImplementsType, z.Key, type);
                         }
@@ -107,7 +107,7 @@ namespace DJT.Vertical.Http
                     }
                     else
                     {
-                        if (z.Key != string.Empty)
+                        if (z.Key != null)
                         {
                             services.TryAddKeyedSingleton(service: type, serviceKey: z.Key);
                         }

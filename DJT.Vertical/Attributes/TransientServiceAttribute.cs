@@ -20,7 +20,7 @@
         /// </summary>
         /// <param name="implements">The type the class implements.</param>
         /// <param name="key">If provided, the keyed service</param>
-        public TransientServiceAttribute(Type implements, string key = "")
+        public TransientServiceAttribute(Type implements, object? key = null)
         {
             ImplementsType = implements;
             Key = key;
@@ -34,6 +34,6 @@
         /// <summary>
         /// If supplied, the service will be registered as a keyed service
         /// </summary>
-        public string Key { get; set; } = string.Empty;
+        public object? Key { get; set; } = null;
     }
 }
