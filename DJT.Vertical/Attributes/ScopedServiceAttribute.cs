@@ -17,7 +17,7 @@
         /// </summary>
         /// <param name="implements">The type which the decorated class implements</param>
         /// <param name="key">The keyed type</param>
-        public ScopedServiceAttribute(Type implements, string key = "")
+        public ScopedServiceAttribute(Type implements, object? key = null)
         {
             ImplementsType = implements;
             Key = key;
@@ -31,6 +31,6 @@
         /// <summary>
         /// If supplied, the service will be registered as a keyed service
         /// </summary>
-        public object? Key { get; set; } = string.Empty;
+        public object? Key { get; set; } = null;
     }
 }
