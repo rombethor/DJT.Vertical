@@ -1,10 +1,9 @@
 ﻿using DJT.Vertical.Attributes;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Reflection;
 
-namespace DJT.Vertical.Http
+namespace DJT.Vertical
 {
     /// <summary>
     /// Extension methods for using the components in this library
@@ -12,15 +11,14 @@ namespace DJT.Vertical.Http
     public static class ServiceExtensions
     {
         /// <summary>
-        /// Adds generic AuthService dependency and registers IRequestHandlers in the calling assembly
+        /// Registers IRequestHandler implementations and services with the <see cref="ScopedServiceAttribute"/>, <see cref="SingletonServiceAttribute"/> 
+        /// and <see cref="TransientServiceAttribute"/> attributes with the DI container.
         /// </summary>
         /// <param name="services"></param>
         public static void AddVerticalComponents(this IServiceCollection services)
         {
-            services.TryAddScoped<AuthService>();
-
             var allTypes = Assembly.GetCallingAssembly().GetTypes();
-            foreach(var type in allTypes)
+            foreach (var type in allTypes)
             {
                 //transient IRequestHandler
                 var i = type.GetInterface("IRequestHandler`1")
@@ -68,7 +66,7 @@ namespace DJT.Vertical.Http
                 {
                     if (s.ImplementsType is not null)
                     {
-                        if (s.Key  != null)
+                        if (s.Key != null)
                         {
                             services.TryAddKeyedScoped(s.ImplementsType, s.Key, type);
                         }
@@ -121,13 +119,6 @@ namespace DJT.Vertical.Http
             }
         }
 
-        /// <summary>
-        /// Adds client error handling middleware for web api
-        /// </summary>
-        /// <param name="app"></param>
-        public static void UseVerticalComponents(this IApplicationBuilder app)
-        {
-            app.UseMiddleware<ClientErrorMiddleware>();
-        }
+
     }
 }
