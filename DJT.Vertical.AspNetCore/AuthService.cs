@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 
-namespace DJT.Vertical.Http
+namespace DJT.Vertical.AspNetCore
 {
     /// <summary>
     /// Relies on the implementation of System.Security.Claims to allow dependency injection of 
