@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace DJT.Vertical.Http
+namespace DJT.Vertical.AspNetCore
 {
     /// <summary>
     /// Catches exceptions provided in DJT.Vertical.Exceptions and the ValidationException.
