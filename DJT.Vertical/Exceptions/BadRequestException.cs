@@ -15,7 +15,7 @@ namespace DJT.Vertical.Exceptions
         /// <summary>
         /// 
         /// </summary>
-        public BadRequestException()
+        public BadRequestException() : base("The request contents or format was unacceptable")
         {
         }
 

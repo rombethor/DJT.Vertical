@@ -8,7 +8,8 @@
         /// <summary>
         /// Default constructor
         /// </summary>
-        public ForbiddenException() { }
+        public ForbiddenException() : base("The user is forbidden from requesting this operation")
+        { }
 
         /// <summary>
         /// Provide a custom status message

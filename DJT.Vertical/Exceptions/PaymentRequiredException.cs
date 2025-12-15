@@ -9,7 +9,7 @@
         /// <summary>
         /// Constructor.
         /// </summary>
-        public PaymentRequiredException()
+        public PaymentRequiredException() : base("The cost associated with this request has yet to be paid")
         {
         }
 

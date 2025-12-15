@@ -8,7 +8,8 @@
         /// <summary>
         /// Default exception
         /// </summary>
-        public ConflictException() { }
+        public ConflictException() : base("The requested operation would cause a conflict and thus couldn't be processed.")
+        { }
 
         /// <summary>
         /// Provides the HTTP status code equivalent to return

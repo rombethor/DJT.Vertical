@@ -8,7 +8,7 @@
         /// <summary>
         /// Default empty constructor
         /// </summary>
-        public NotFoundException()
+        public NotFoundException() : base("The requested resource could not be found")
         {
         }
 

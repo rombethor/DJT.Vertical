@@ -23,7 +23,7 @@
         /// Provide a custom status code
         /// </summary>
         /// <param name="statusCode"></param>
-        public CustomStatusException(int statusCode)
+        public CustomStatusException(int statusCode) : base($"The operation resulted in the status code {statusCode}")
         {
             _statusCode = statusCode;
         }
