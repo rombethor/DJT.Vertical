@@ -3,27 +3,39 @@
     /// <summary>
     /// Provide a custom status code
     /// </summary>
-    public class CustomStatusException : Exception
+    public sealed class CustomStatusException : VerticalException
     {
         private readonly int _statusCode;
 
         /// <summary>
         /// The status code provided by this exception
         /// </summary>
-        public int StatusCode => _statusCode;
+        public override int StatusCode => _statusCode;
 
-        private readonly object? _body;
+        private readonly object? _customBody = null;
 
         /// <summary>
         /// The body for the response
         /// </summary>
-        public object? Body => _body;
+        public override object? Body => _customBody ?? ValidationResult;
 
         /// <summary>
         /// Provide a custom status code
         /// </summary>
         /// <param name="statusCode"></param>
-        public CustomStatusException(int statusCode)
+        public CustomStatusException(int statusCode) : base($"The operation resulted in the status code {statusCode}")
+        {
+            _statusCode = statusCode;
+        }
+
+        public CustomStatusException(int statusCode, string error)
+            : base(error)
+        {
+            _statusCode = statusCode;
+        }
+
+        public CustomStatusException(int statusCode, string error, params string[] propertyNames)
+            : base(error, propertyNames)
         {
             _statusCode = statusCode;
         }
@@ -36,7 +48,7 @@
         public CustomStatusException(int statusCode, object? body)
         {
             _statusCode = statusCode;
-            _body = body;
+            _customBody = body;
         }
     }
 }

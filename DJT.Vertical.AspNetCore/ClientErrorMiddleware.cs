@@ -22,37 +22,16 @@ namespace DJT.Vertical.AspNetCore
             {
                 await next(context);
             }
-            catch (NotFoundException ex)
+            catch (VerticalException ex)
             {
-                context.Response.StatusCode = StatusCodes.Status404NotFound;
-            }
-            catch (BadRequestException ex)
-            {
-                context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                await context.Response.WriteAsJsonAsync(ex.ValidationResult);
+                context.Response.StatusCode = ex.StatusCode;
+                if (ex.Body is not null)
+                    await context.Response.WriteAsJsonAsync(ex.Body);
             }
             catch (ValidationException ex)
             {
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 await context.Response.WriteAsJsonAsync(ex.ValidationResult);
-            }
-            catch (ConflictException)
-            {
-                context.Response.StatusCode = StatusCodes.Status409Conflict;
-            }
-            catch (ForbiddenException)
-            {
-                context.Response.StatusCode = StatusCodes.Status403Forbidden;
-            }
-            catch (PaymentRequiredException)
-            {
-                context.Response.StatusCode = StatusCodes.Status402PaymentRequired;
-            }
-            catch (CustomStatusException ex)
-            {
-                context.Response.StatusCode = ex.StatusCode;
-                if (ex.Body is not null)
-                    await context.Response.WriteAsJsonAsync(ex.Body);
             }
         }
     }

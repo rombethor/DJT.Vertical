@@ -3,19 +3,34 @@
     /// <summary>
     /// Provides a 403 Forbidden status result.
     /// </summary>
-    public class ForbiddenException : Exception
+    public sealed class ForbiddenException : VerticalException
     {
         /// <summary>
         /// Default constructor
         /// </summary>
-        public ForbiddenException() { }
+        public ForbiddenException() : base("The user is forbidden from requesting this operation")
+        { }
 
         /// <summary>
         /// Provide a custom status message
         /// </summary>
         /// <param name="message">Custom message for the response</param>
-        public ForbiddenException(string? message) : base(message)
+        public ForbiddenException(string message) : base(message)
         {
         }
+
+        /// <summary>
+        /// Provide a custom message with member names for additional information.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="properties"></param>
+        public ForbiddenException(string message, params string[] properties) : base(message, properties)
+        {
+        }
+
+        /// <summary>
+        /// 403 Forbidden
+        /// </summary>
+        public override int StatusCode => 403;
     }
 }
